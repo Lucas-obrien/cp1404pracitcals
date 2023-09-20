@@ -1,17 +1,17 @@
 """
 Get user score and print a rating
 """
-
+# score.py
 import random
 
 
 def main():
     score = float(input("Enter score: "))
-    print(validate_score(score))
-    print(validate_score(random.randint(0, 100)))
+    print(display_score(score))
+    print(display_score(random.randint(0, 100)))
 
 
-def validate_score(score):
+def display_score(score):
     if score < 0 or score > 100:
         return "Invalid score"
     elif score < 50:
@@ -22,4 +22,4 @@ def validate_score(score):
         return "Excellent"
 
 
-main()
+# main()
