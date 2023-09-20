@@ -23,5 +23,5 @@ def display_score(score):
     else:
         return "Excellent"
 
-
+# commented out so importing this file wouldn't cause issues
 # main()
