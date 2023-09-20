@@ -18,7 +18,8 @@ MINIMUM_PASSWORD_LENGTH = 5
 
 
 def main():
-    """Has the user input a password, then prints an amount of * equal to the length of the password."""
+    """Program that has the user input a password, validate it, then prints an amount of * equal to the length of
+        the password."""
     password = get_password()
     print_stars(password)
 

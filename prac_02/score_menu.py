@@ -32,6 +32,8 @@ MENU = "(G)et a valid score\n(P)rint result\n(S)how stars\n(Q)uit"
 
 
 def main():
+    """Program that displays a menu with options, then validates a score, prints * equal to the score or displays a
+        rating of a score."""
     print(MENU)
     menu_choice = input("choose: ").upper()
     while menu_choice != "Q":
@@ -51,10 +53,12 @@ def main():
 
 
 def show_total_stars(user_score):
+    """Returns * equal to the input amount."""
     return "*" * user_score
 
 
 def get_valid_score():
+    """Gets a user's score from input, then validates based on boundary conditions, then returns score."""
     user_score = int(input("Enter score: "))
     while user_score > 100 or user_score < 0:
         print("Invalid score")
