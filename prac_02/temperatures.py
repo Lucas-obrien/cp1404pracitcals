@@ -15,8 +15,10 @@ def main():
     while choice != "Q":
         if choice == "C":
             celsius = float(input("Celsius: "))
-            print(f"Result: {convert_celsius_to_fahrenheit(celsius):.2f} F")
-        elif choice == "F":
+            # temperature = convert_celsius_to_fahrenheit(celsius)
+            # print(temperature)
+            print(f"Result: {convert_celsius_to_fahrenheit(celsius):.2f} F")  # give the result from the function into
+        elif choice == "F":                                                   # a variable for ease of reading
             fahrenheit = float(input("Fahrenheit: "))
             print(f"{convert_fahrenheit_to_celsius(fahrenheit):.2f} C")
         else:
