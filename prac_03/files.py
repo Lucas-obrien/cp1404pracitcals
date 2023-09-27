@@ -5,7 +5,7 @@ with open("name.txt", "w") as out_file:
 
 # Question 2:
 with open("name.txt", "r") as input_file:
-    print(input_file.readline())
+    print(f"Your name is {input_file.readline().strip()}")
 
 # Question 3:
 with open("numbers.txt", "r") as input_file:
