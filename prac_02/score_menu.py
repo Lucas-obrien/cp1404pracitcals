@@ -26,7 +26,7 @@ function get valid score
     return score
 """
 
-from score import display_score
+from score import determine_score
 
 MENU = "(G)et a valid score\n(P)rint result\n(S)how stars\n(Q)uit"
 
@@ -40,7 +40,7 @@ def main():
         if menu_choice == "G":
             user_score = get_valid_score()
         elif menu_choice == "P":
-            print(display_score(user_score))
+            print(determine_score(user_score))
         elif menu_choice == "S":
             print(show_total_stars(user_score))
         else:
