@@ -43,8 +43,10 @@ def is_valid_password(password):
             count_upper += 1
         elif char.islower():
             count_lower += 1
-        else:
+        elif char in SPECIAL_CHARACTERS and SPECIAL_CHARS_REQUIRED:
             count_special += 1
+        else:
+            return False
     # if any of the 'normal' counts are zero, return False
     if count_upper == 0 or count_lower == 0 or count_digit == 0:
         return False
