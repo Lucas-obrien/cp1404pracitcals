@@ -18,5 +18,5 @@ with open("numbers.txt", "r") as input_file:
     numbers = input_file.readlines()
     sum_of_numbers = 0
     for number in numbers:
-        sum_of_numbers += float(number)
+        sum_of_numbers += float(number) # assumes future numbers could be non-int
     print(f"Total sum of list is {sum_of_numbers}")
