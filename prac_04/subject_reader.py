@@ -31,6 +31,7 @@ def get_data():
 
 
 def print_subject_information(data):
+    """Take in data from a nested list, then print each individual part from each index"""
     for part in data:
         print(f"{part[0]} is taught by {part[1]} and has {part[2]} students")
 
