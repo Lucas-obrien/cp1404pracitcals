@@ -16,3 +16,9 @@ You can use the functions min, max, sum and len, and you can use the append meth
 
 usernames = ['jimbo', 'giltson98', 'derekf', 'WhatSup', 'NicolEye', 'swei45', 'BaseInterpreterInterface', 'BaseStdIn',
              'Command', 'ExecState', 'InteractiveConsole', 'InterpreterInterface', 'StartServer', 'bob']
+
+if input("Enter username: ") in usernames:
+    print("Access granted")
+else:
+    print("Access denied")
+
