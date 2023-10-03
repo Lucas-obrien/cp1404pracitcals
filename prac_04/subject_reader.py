@@ -8,7 +8,7 @@ FILENAME = "subject_data.txt"
 
 def main():
     data = get_data()
-    print_subject_information(data)
+    print_subject(data)
 
 
 def get_data():
@@ -30,10 +30,10 @@ def get_data():
     return subject_information
 
 
-def print_subject_information(data):
+def print_subject(subjects):
     """Take in data from a nested list, then print each individual part from each index"""
-    for part in data:
-        print(f"{part[0]} is taught by {part[1]} and has {part[2]} students")
+    for subject in subjects:
+        print(f"{subject[0]} is taught by {subject[1]:<12} and has {subject[2]:3} students")
 
 
 main()
