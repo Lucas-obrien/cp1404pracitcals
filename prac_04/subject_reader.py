@@ -7,6 +7,7 @@ FILENAME = "subject_data.txt"
 
 
 def main():
+    """Program that gets student data and displays in a specified format"""
     data = get_data()
     print_subject(data)
 
