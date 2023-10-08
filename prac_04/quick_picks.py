@@ -13,3 +13,4 @@ for i in range(number_of_quickpicks):
             random_number = random.randint(1, MAXIMUM_RANDOM_NUMBERS)
         quickpick_numbers.append(random_number)
     print(" ".join(f"{number:2}" for number in sorted(quickpick_numbers)))
+
