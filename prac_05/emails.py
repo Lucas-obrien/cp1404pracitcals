@@ -13,5 +13,10 @@ email_detail = email_input.split("@")
 
 name = ' '.join(email_detail[0].split('.')).title()
 
+if input(f'Is your name {name}') != "":
+    name = input("Name: ")
+
+name_to_email[name] = email_input
+print(name_to_email)
 
 
