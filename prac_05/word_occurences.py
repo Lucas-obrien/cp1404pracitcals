@@ -15,3 +15,4 @@ for word in text:
         word_to_count[word] += 1
     except KeyError:
         word_to_count[word] = 1
+longest_word = max((len(word)) for word in word_to_count)
