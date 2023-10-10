@@ -8,7 +8,7 @@ Actual: 21:08
 text = "this is a collection of words of nice words this is a fun thing it is"
 
 word_to_count = {}
-
+print(text)
 text = text.split()
 for word in text:
     try:
