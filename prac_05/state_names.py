@@ -24,3 +24,6 @@ while state_code != "":
         print("Invalid short state")
     state_code = input("Enter short state: ").upper()
 
+# Loop that prints all keys and associated values in dictionary, formatted to align
+for code in CODE_TO_NAME:
+    print(f"{code:3} is {CODE_TO_NAME[code]}")
