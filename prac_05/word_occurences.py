@@ -1,7 +1,7 @@
 """
-Word Occurences
+Word Occurrences
 Estimate: 20 minutes
-Actual:
+Actual: 21:08
 
 """
 
