@@ -25,4 +25,10 @@ for match in wimbledon_finals:
     except KeyError:
         champion_to_wins[match[2]] = 1
 
+print("Wimbledon Champions:")
+for champion, win in champion_to_wins.items():
+    print(f"{champion} : {win}")
+
+print(f"These {len(set(countries))} countries have won Wimbledon:")
+print(", ".join(country for country in sorted(set(countries))))
 
