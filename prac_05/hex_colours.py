@@ -11,3 +11,11 @@ NAME_TO_CODE = {
     "Jungle Green": "4cbb17"
 }
 
+print(NAME_TO_CODE)
+choice = input("Enter a colour name: ").title()
+while choice != "":
+    try:
+        print(NAME_TO_CODE[choice])
+    except KeyError:
+        print("Invalid Name")
+    choice = input("Enter a colour name: ").title()
