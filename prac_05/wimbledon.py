@@ -25,14 +25,14 @@ def get_winners(wimbledon_finals):
 def compile_winners(champion_to_wins, wimbledon_finals):
     """Take empty lists and dictionary then add winning countries to a list and add to count of a key or set a key's
     value"""
-    countries = []
+    countries = set()
     for match in wimbledon_finals:
+        countries.add(match[INDEX_CHAMPION_COUNTRY])
         try:
-            countries.append(match[INDEX_CHAMPION_COUNTRY])
             champion_to_wins[match[INDEX_CHAMPION_NAME]] += 1
         except KeyError:
             champion_to_wins[match[INDEX_CHAMPION_NAME]] = 1
-    return set(countries)
+    return countries
 
 
 def display_winners(champion_to_wins, winning_countries):
