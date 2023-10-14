@@ -1,5 +1,8 @@
 import csv
 
+INDEX_CHAMPION_NAME = 2
+INDEX_CHAMPION_COUNTRY = 1
+
 
 def main():
     """Take in a list of Wimbledon final matches, then process and display the winners"""
@@ -25,18 +28,18 @@ def compile_winners(champion_to_wins, wimbledon_finals):
     countries = []
     for match in wimbledon_finals:
         try:
-            countries.append(match[1])
-            champion_to_wins[match[2]] += 1
+            countries.append(match[INDEX_CHAMPION_COUNTRY])
+            champion_to_wins[match[INDEX_CHAMPION_NAME]] += 1
         except KeyError:
-            champion_to_wins[match[2]] = 1
+            champion_to_wins[match[INDEX_CHAMPION_NAME]] = 1
     return set(countries)
 
 
 def display_winners(champion_to_wins, winning_countries):
     """Take a dictionary of winners and a list of winning countries and display formatted"""
     print("Wimbledon Champions:")
-    for champion, win in champion_to_wins.items():
-        print(f"{champion} : {win}")
+    for champion, count in champion_to_wins.items():
+        print(f"{champion} : {count}")
     print(f"These {len(winning_countries)} countries have won Wimbledon:")
     print(", ".join(country for country in sorted(winning_countries)))
 
