@@ -8,12 +8,12 @@ def main():
     """Take in a list of Wimbledon final matches, then process and display the winners"""
     champion_to_wins = {}
     wimbledon_finals = []
-    get_winners(wimbledon_finals)
+    get_match_results(wimbledon_finals)
     winning_countries = compile_winners(champion_to_wins, wimbledon_finals)
     display_winners(champion_to_wins, winning_countries)
 
 
-def get_winners(wimbledon_finals):
+def get_match_results(wimbledon_finals):
     """Open a csv file, read and then append to a list"""
     with open("wimbledon.csv", "r", encoding="utf-8-sig") as in_file:
         in_file.readline()
