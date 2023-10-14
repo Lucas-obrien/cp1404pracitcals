@@ -4,15 +4,14 @@ Estimate: 20 minutes
 Actual:
 
 """
-text = "this is a collection of words of nice words this is a fun thing it is"
+text = input(": ")
 word_to_count = {}
-print(text)
-text = text.split()
-for word in text:
+strings = text.split()
+for string in strings:
     try:
-        word_to_count[word] += 1
+        word_to_count[string] += 1
     except KeyError:
-        word_to_count[word] = 1
+        word_to_count[string] = 1
 
 longest_word = max((len(word)) for word in word_to_count)
 for word in sorted(word_to_count):
