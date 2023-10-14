@@ -9,8 +9,7 @@ name_to_email = {}
 
 email = input("Email: ")
 while email != "":
-    parts = email.split("@")
-    name = ' '.join(parts[0].split('.')).title()
+    name = ' '.join((email.split('@'))[0].split('.')).title()
     choice = input(f'Is your name {name}? (Y/n) ').upper()
     if choice != "Y" and choice != "":
         name = input("Name: ")
