@@ -17,5 +17,5 @@ class ProgrammingLanguage:
         self.year = year
 
     def is_dynamic(self):
-        return self.reflection
+        return self.typing == "dynamic"
 
