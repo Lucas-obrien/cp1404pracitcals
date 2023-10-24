@@ -1,7 +1,7 @@
 """Module docstring
 
 estimation - 30 mins
-actual -
+actual - 16 mins
 
 """
 
@@ -17,6 +17,7 @@ class ProgrammingLanguage:
         self.year = year
 
     def is_dynamic(self):
+        """Return True or False if programming language is dynamically typed"""
         return self.typing == "Dynamic"
 
     def __str__(self):
