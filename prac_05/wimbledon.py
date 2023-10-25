@@ -7,7 +7,7 @@ INDEX_CHAMPION_COUNTRY = 1
 def main():
     """Take in a list of Wimbledon final matches, then process and display the winners"""
     champion_to_wins = {}
-    wimbledon_finals = []
+    wimbledon_finals = []  # Unnecessary to declare here make this
     get_match_results(wimbledon_finals)
     winning_countries = compile_winners(champion_to_wins, wimbledon_finals)
     display_winners(champion_to_wins, winning_countries)
