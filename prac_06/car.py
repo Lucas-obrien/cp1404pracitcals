@@ -32,5 +32,5 @@ class Car:
         return distance
 
     def __str__(self):
-        """Return constructed string of name, fuel=, and odometer="""
+        """Return constructed string of name, fuel=, and odometer=."""
         return f"{self.name}, fuel={self.fuel}, odometer={self._odometer}"
