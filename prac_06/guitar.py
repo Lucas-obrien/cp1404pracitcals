@@ -1,4 +1,8 @@
-"""Guitar class"""
+"""Guitar class
+Estimate - 45mins
+Actual - 25mins
+
+"""
 
 
 class Guitar:
