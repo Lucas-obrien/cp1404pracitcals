@@ -1,7 +1,7 @@
 """
 
 estimation - 30 mins
-actual -
+actual - 60 mins
 
 """
 
@@ -17,6 +17,7 @@ INDEX_COST = 2
 
 
 def main():
+    """Program that reads and adds guitars to a csv file."""
     guitars = []
     with open(FILENAME, "r") as in_file:
         in_file.readline()
