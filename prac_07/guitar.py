@@ -13,7 +13,7 @@ class Guitar:
         self.year = year
         self.cost = cost
 
-    def __str__(self):
+    def __repr__(self):
         """Returns formatted string, example: Gibson L-5 CES (1922) : $16,035.40."""
         return f"{self.name} ({self.year}) : ${self.cost:,.2f}"
 
