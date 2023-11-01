@@ -14,6 +14,11 @@ class ProjectManagement:
         self.completion_percentage = completion_percentage
 
     def __repr__(self):
-        return (f"{self.name}, start: {self.start_date}, priority {self.priority}, estimate: ${self.cost_estimate}"
+        return (f"{self.name}, start: {self.start_date}, priority {self.priority}, estimate: ${self.cost_estimate}, "
                 f"completion {self.completion_percentage}%")
 
+    def __lt__(self, other):
+        return self.priority < other.priority
+
+    def __gt__(self, other):
+        return self.start_date > other.start_date
