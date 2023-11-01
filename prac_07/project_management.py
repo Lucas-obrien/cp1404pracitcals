@@ -22,3 +22,11 @@ class ProjectManagement:
 
     def __gt__(self, other):
         return self.start_date > other.start_date
+
+    def is_incomplete(self):
+        return int(self.completion_percentage) < 100
+
+    def is_valid_percent(self):
+        return int(self.completion_percentage) > 0 and self.completion_percentage.isint()
+
+
