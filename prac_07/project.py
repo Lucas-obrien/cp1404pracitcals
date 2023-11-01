@@ -1,6 +1,6 @@
 """
 
-estimate - 90 mins
+estimate - 90 minutes
 actual -
 
 
@@ -20,12 +20,12 @@ actual -
 """
 import datetime
 import csv
-from collections import namedtuple
-from operator import itemgetter
+# from collections import namedtuple
+# from operator import itemgetter
 from project_management import ProjectManagement
 
 MENU = ("- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n- (A)dd new project\n"
-        "- (U)pdate project)\n- (Q)uit\n>>> ")
+        "- (U)pdate project\n- (Q)uit\n>>> ")
 FILENAME = 'projects.txt'
 
 
@@ -38,16 +38,14 @@ def main():
             projects, file_header_names = load_projects()
         elif choice == "S":
             if projects:
-                save_projects(file_header_names, projects)
+                save_projects(file_header_names,
+                              projects)  # ignore error; won't reach here without a project being loaded
             else:
                 print("Nothing to save")
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
-            date_string = input("Show projects that start after date (d/m/yyyy): ")
-            date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()  # e.g., "30/9/2022"
-            for project in projects:
-                print(datetime.datetime.strptime(project.start_date, "%d/%m/%Y").date() > date)
+            filter_projects(projects)
         elif choice == "A":
             date_string = input("Date (d/m/yyyy): ")  # e.g., "30/9/2022"
             date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
@@ -59,6 +57,15 @@ def main():
         else:
             print("Invalid choice")
         choice = input(MENU).upper()
+
+
+def filter_projects(projects):
+    date_string = input("Show projects that start after date (d/m/yyyy): ")
+    date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()  # e.g., "30/9/2022"
+    filtered_projects = [project for project in projects
+                         if datetime.datetime.strptime(project.start_date, "%d/%m/%Y").date() > date]
+    for project in filtered_projects:
+        print(project)
 
 
 def save_projects(file_header_names, projects):
