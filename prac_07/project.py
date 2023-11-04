@@ -47,7 +47,7 @@ def main():
             add_project(projects)
         elif choice == "U":
             update_project(projects)
-            print("Nothing to update")
+
         else:
             print("Invalid choice")
         choice = input(MENU).upper()
@@ -80,14 +80,16 @@ def update_project(projects):
         print(i, project)
     choice = is_valid_project("Pick a project: ", projects)
     print(projects[choice])
-    new_percentage = int(input("New percentage: "))
+    new_percentage = input("New percentage: ")
     if not new_percentage:
-        new_percentage = projects[choice].completion_percentage
-    new_priority = input("New Priority: ")
+        new_percentage \
+            = projects[choice].completion_percentage
+    new_priority = int(input("New Priority: "))
     if not new_priority:
         new_priority = projects[choice].priority
     projects[choice] = ProjectManagement(projects[choice].name, projects[choice].start_date, new_priority,
                                          projects[choice].cost_estimate, new_percentage)
+    print(type(projects[choice].priority))
 
 
 def is_valid_project(output_string, projects):
@@ -157,9 +159,9 @@ def is_valid_date(output_string):
 def filter_projects(projects):
     try:
         date_string = input("Show projects that start after date (d/m/yyyy): ")
-        date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()  # e.g., "30/9/2022"
+        filter_date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()  # e.g., "30/9/2022"
         filtered_projects = [project for project in projects
-                             if datetime.datetime.strptime(project.start_date, "%d/%m/%Y").date() > date]
+                             if datetime.datetime.strptime(project.start_date, "%d/%m/%Y").date() > filter_date]
         for project in filtered_projects:
             print(project)
     except ValueError:
@@ -189,7 +191,7 @@ def load_file(file_name):
 def display_projects(projects):
     incomplete_projects = [project for project in projects if project.is_incomplete()]
     incomplete_projects = sorted(incomplete_projects, key=lambda project: project.priority)
-    complete_projects = [project for project in projects if not project.is_incomplete()]
+    complete_projects = [project for project in projects if project not in incomplete_projects]
     complete_projects = sorted(complete_projects, key=lambda project: project.priority)
     print("Incomplete projects:")
     for project in incomplete_projects:
