@@ -12,8 +12,8 @@ import csv
 # from operator import itemgetter
 from project_management import ProjectManagement
 
-MENU = ("- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n- (A)dd new project\n"
-        "- (U)pdate project\n- (Q)uit\n>>> ")
+MENU = ("- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date"
+        "\n- (A)dd new project\n- (U)pdate project\n- (Q)uit\n>>> ")
 DEFAULT_LOAD_FILE = 'projects.txt'
 NO_MAXIMUM = "No Max"
 DEFAULT_SAVE_FILE = 'projects.txt'
@@ -27,7 +27,7 @@ MINIMUM_COST = 0
 def main():
     """Project management tool."""
     choice = input(MENU).upper()
-    projects, file_header_names = load_file(DEFAULT_LOAD_FILE)  # make this autoload the file
+    projects, file_header_names = load_file(DEFAULT_LOAD_FILE)  # load file at start of program
     while choice != "Q":
         if choice == "L":
             file_header_names, projects = manual_load_file()
@@ -77,8 +77,9 @@ def update_project(projects):
     new_priority = int(is_valid_number("New Priority: ", MINIMUM_PRIORITY, MAXIMUM_PRIORITY))
     if not new_priority:
         new_priority = projects[choice].priority
-    projects[choice] = ProjectManagement(projects[choice].name, projects[choice].start_date, new_priority,
-                                         projects[choice].cost_estimate, new_percentage)
+    projects[choice] = ProjectManagement(projects[choice].name, projects[choice].start_date,
+                                         new_priority, projects[choice].cost_estimate,
+                                         new_percentage)
 
 
 def is_valid_project(output_string, projects):
@@ -103,8 +104,10 @@ def add_project(projects):
     start_date = is_valid_date("Start date (d/m/yyyy): ")  # e.g., "30/9/2022"
     priority = is_valid_number("Priority: ", MINIMUM_PRIORITY, MAXIMUM_PRIORITY)
     cost_estimate = float(is_valid_number("Cost estimate: $", MINIMUM_COST, NO_MAXIMUM))
-    completion_percentage = is_valid_number("Completion percentage: ", MINIMUM_PERCENTAGE, MAXIMUM_PERCENTAGE)
-    projects.append(ProjectManagement(name, start_date, priority, cost_estimate, completion_percentage))
+    completion_percentage = is_valid_number("Completion percentage: ",
+                                            MINIMUM_PERCENTAGE, MAXIMUM_PERCENTAGE)
+    projects.append(ProjectManagement(name, start_date, priority,
+                                      cost_estimate, completion_percentage))
 
 
 def is_valid_number(output_string, minimum_number, maximum_number):
@@ -156,9 +159,10 @@ def filter_projects(projects):
     """Sort projects based on an entered date value"""
     try:
         date_string = input("Show projects that start after date (d/m/yyyy): ")
-        filter_date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()  # e.g., "30/9/2022"
+        filter_date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()  # e.g.,"30/9/2022"
         filtered_projects = [project for project in projects
-                             if datetime.datetime.strptime(project.start_date, "%d/%m/%Y").date() > filter_date]
+                             if datetime.datetime.strptime(project.start_date, "%d/%m/%Y").date()
+                             > filter_date]
         filtered_projects.sort(key=lambda project: project.start_date, reverse=True)
         display_projects(filtered_projects)
     except ValueError:
@@ -167,22 +171,23 @@ def filter_projects(projects):
 
 def save_file(file_header_names, projects, save_file_name):
     """Open and save to a specified file."""
-    with open(save_file_name, "w") as out_file:
+    with open(save_file_name, "w", encoding="UTF-8") as out_file:
         print(file_header_names, file=out_file)
         for project in projects:
-            project_details = [project.name, project.start_date, str(project.priority), str(project.cost_estimate),
-                               str(project.completion_percentage)]
+            project_details = [project.name, project.start_date, str(project.priority),
+                               str(project.cost_estimate), str(project.completion_percentage)]
             print("\t".join(project_details), file=out_file)
 
 
 def load_file(file_name):
     """Read in a specified file."""
     projects = []
-    with open(file_name, "r") as in_file:
+    with open(file_name, "r", encoding="UTF-8") as in_file:
         file_header_names = in_file.readline().strip()
         reader = csv.reader(in_file, delimiter='\t')
         for row in reader:
-            projects.append(ProjectManagement(row[0], row[1], int(row[2]), float(row[3]), int(row[4])))
+            projects.append(ProjectManagement(row[0], row[1], int(row[2]),
+                                              float(row[3]), int(row[4])))
     return projects, file_header_names
 
 
