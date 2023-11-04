@@ -4,18 +4,6 @@ estimate - 90 minutes
 actual -
 
 
-    Load projects
-    (Prompt the user for a filename to load projects from and load them)
-    Save projects
-    (Prompt the user for a filename to save projects to and save them)
-    Display projects
-    (Display two groups: incomplete projects; completed projects, both sorted by priority)
-    Filter projects by date
-    (Ask the user for a date and display only projects that start after that date, sorted by date)
-    Add new project
-    (Ask the user for the inputs and add a new project to memory)
-    Update project
-    (Choose a project, then modify the completion % and/or priority - leave blank to retain existing values)
 
 """
 import datetime
@@ -37,6 +25,7 @@ MINIMUM_COST = 0
 
 
 def main():
+    """Project management tool."""
     choice = input(MENU).upper()
     projects, file_header_names = load_file(DEFAULT_LOAD_FILE)  # make this autoload the file
     while choice != "Q":
@@ -60,22 +49,25 @@ def main():
 
 
 def manual_save_file(file_header_names, projects):
+    """Prompt user for a file name, then write list into it."""
     save_file_name = input("Input file name to save to: ")
     # ignore error; won't reach here without a project being loaded
     save_file(file_header_names, projects, save_file_name)
 
 
 def manual_load_file():
+    """Prompt user for a file name, then try to load, on fail set list to blank."""
     try:
         file_name = input("Enter file name to load: ")
         projects, file_header_names = load_file(file_name)
     except FileNotFoundError:
         print("File not found, loading blank list")
         projects = []
-    return file_header_names, projects
+    return file_header_names, projects  # Ignore error; appears due to try/except
 
 
 def update_project(projects):
+    """Select and update a current project."""
     for i, project in enumerate(projects):
         print(i, project)
     choice = is_valid_project("Pick a project: ", projects)
@@ -129,7 +121,7 @@ def is_valid_number(output_string, minimum_number, maximum_number):
                 print(f"Number must be {error_string}")
         except ValueError:
             print("Invalid number")
-    return number_choice
+    return number_choice  # Ignore error; appears due to try/except
 
 
 def is_valid_string(input_string):
@@ -144,7 +136,7 @@ def is_valid_string(input_string):
                 valid_string = True
         except ValueError:
             print(f"Invalid {input_string}")
-    return choice
+    return choice  # Ignore error; appears due to try/except
 
 
 def is_valid_date(output_string):
@@ -157,7 +149,7 @@ def is_valid_date(output_string):
             valid_date = True
         except ValueError:
             print("Invalid date format")
-    return date
+    return date  # Ignore error; appears due to try/except
 
 
 def filter_projects(projects):
@@ -174,6 +166,7 @@ def filter_projects(projects):
 
 
 def save_file(file_header_names, projects, save_file_name):
+    """Open and save to a specified file."""
     with open(save_file_name, "w") as out_file:
         print(file_header_names, file=out_file)
         for project in projects:
@@ -183,6 +176,7 @@ def save_file(file_header_names, projects, save_file_name):
 
 
 def load_file(file_name):
+    """Read in a specified file."""
     projects = []
     with open(file_name, "r") as in_file:
         file_header_names = in_file.readline().strip()
