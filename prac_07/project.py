@@ -26,22 +26,19 @@ from project_management import ProjectManagement
 
 MENU = ("- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date\n- (A)dd new project\n"
         "- (U)pdate project\n- (Q)uit\n>>> ")
-FILENAME = 'projects.txt'
+DEFAULT_LOAD_FILE = 'projects.txt'
+DEFAULT_SAVE_FILE = 'projects.txt'
 
 
 def main():
-    projects = []
     choice = input(MENU).upper()
-
+    projects, file_header_names = load_file(DEFAULT_LOAD_FILE)  # make this auto load the file
+    print(file_header_names)
     while choice != "Q":
         if choice == "L":
-            projects, file_header_names = load_projects()
+            file_header_names, projects = manual_load_file(file_header_names, projects)
         elif choice == "S":
-            if projects:
-                # ignore error; won't reach here without a project being loaded
-                save_projects(file_header_names, projects)
-            else:
-                print("Nothing to save")
+            manual_save_file(file_header_names, projects)
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -50,9 +47,32 @@ def main():
             add_project(projects)
         elif choice == "U":
             update_project(projects)
+            print("Nothing to update")
         else:
             print("Invalid choice")
         choice = input(MENU).upper()
+    save_projects(file_header_names, projects, DEFAULT_SAVE_FILE)
+
+
+def manual_load_file(file_header_names, projects):
+    file_header_names, projects = load_user_file(file_header_names, projects)
+    return file_header_names, projects
+
+
+def manual_save_file(file_header_names, projects):
+    save_file_name = input("Input file name to save to: ")
+    # ignore error; won't reach here without a project being loaded
+    save_projects(file_header_names, projects, save_file_name)
+
+
+def load_user_file(file_header_names, projects):
+    try:
+        file_name = input("Enter file name to load: ")
+        projects, file_header_names = load_file(file_name)
+    except FileNotFoundError:
+        print("File not found, loading blank list")
+        projects = []
+    return file_header_names, projects
 
 
 def update_project(projects):
@@ -87,10 +107,11 @@ def is_valid_project(output_string, projects):
 
 
 def add_project(projects):
+    print("Let's add a new project")
     name = is_valid_string("name: ")
     start_date = is_valid_date("Start date (d/m/yyyy): ")  # e.g., "30/9/2022"
     priority = is_valid_number("Priority: ")
-    cost_estimate = is_valid_number("Cost estimate: $")
+    cost_estimate = float(is_valid_number("Cost estimate: $"))
     completion_percentage = is_valid_number("Completion percentage: ")
     projects.append(ProjectManagement(name, start_date, priority, cost_estimate, completion_percentage))
 
@@ -145,21 +166,23 @@ def filter_projects(projects):
         print("Incorrect format for date")
 
 
-def save_projects(file_header_names, projects):
-    with open('test.txt', "w") as out_file:
-        print(file_header_names.strip(), file=out_file)
+def save_projects(file_header_names, projects, save_file_name):
+    with open(save_file_name, "w") as out_file:
+        print(file_header_names, file=out_file)
         for project in projects:
-            print(project, file=out_file)
+            project_details = [project.name, project.start_date, str(project.priority), str(project.cost_estimate),
+                               str(project.completion_percentage)]
+            print("\t".join(project_details), file=out_file)
 
 
-def load_projects():
-    with open(FILENAME, "r") as in_file:
-        file_header_names = in_file.readline()
+def load_file(file_name):
+    projects = []
+    with open(file_name, "r") as in_file:
+        file_header_names = in_file.readline().strip()
         reader = csv.reader(in_file, delimiter='\t')
-        projects = []
         for row in reader:
             print(row)
-            projects.append(ProjectManagement(row[0], row[1], row[2], row[3], row[4]))
+            projects.append(ProjectManagement(row[0], row[1], int(row[2]), float(row[3]), int(row[4])))
     return projects, file_header_names
 
 
