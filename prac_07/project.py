@@ -14,13 +14,13 @@ MENU = ("- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter 
         "\n- (A)dd new project\n- (U)pdate project\n- (Q)uit\n>>> ")
 DEFAULT_LOAD_FILE = 'projects.txt'
 DEFAULT_FILE_HEADER_NAMES = "Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage\t"
-NO_MAXIMUM = False  # Used as an alternative instead of setting a MAXIMUM_COST
 DEFAULT_SAVE_FILE = 'projects.txt'
 MINIMUM_PRIORITY = 0
 MAXIMUM_PRIORITY = 9
 MINIMUM_PERCENTAGE = 0
 MAXIMUM_PERCENTAGE = 100
 MINIMUM_COST = 0
+MAXIMUM_COST = False  # Using false instead of a value as no maximum cost specified
 
 
 def main():
@@ -72,7 +72,6 @@ def load_file(file_name):
 def manual_save_file(file_header_names, projects):
     """Prompt for a file name, then write list into it."""
     save_file_name = input("Input file name to save to: ")
-    # ignore error; won't reach here without a project being loaded
     save_file(file_header_names, projects, save_file_name)
 
 
@@ -125,7 +124,7 @@ def add_project(projects):
     name = get_valid_string("name: ")
     start_date = get_valid_date("Start date (d/m/yyyy): ")  # e.g., "30/9/2022"
     priority = get_valid_number("Priority: ", MINIMUM_PRIORITY, MAXIMUM_PRIORITY)
-    cost_estimate = float(get_valid_number("Cost estimate: $", MINIMUM_COST, NO_MAXIMUM))
+    cost_estimate = float(get_valid_number("Cost estimate: $", MINIMUM_COST, MAXIMUM_COST))
     completion_percentage = get_valid_number("Completion percentage: ",
                                              MINIMUM_PERCENTAGE, MAXIMUM_PERCENTAGE)
     projects.append(ProjectManagement(name, start_date, priority,
@@ -145,7 +144,7 @@ def get_valid_number(output_string, minimum_number, maximum_number):
                 valid_number = True
             else:
                 error_string = f"between {minimum_number} and {maximum_number} inclusive" if \
-                    (maximum_number != NO_MAXIMUM) else f"greater than or equal to {minimum_number}"
+                    (maximum_number != MAXIMUM_COST) else f"greater than or equal to {minimum_number}"
                 print(f"Number must be {error_string}")
         except ValueError:
             print("Invalid number")
