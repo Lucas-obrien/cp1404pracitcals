@@ -27,9 +27,9 @@ class ProgrammingLanguage:
 
 def run_tests():
     """Run simple tests/demos on ProgrammingLanguage class."""
-    ruby = ProgrammingLanguage("Ruby", "Dynamic", True, 1995, "Yes")
-    python = ProgrammingLanguage("Python", "Dynamic", True, 1991, "No")
-    visual_basic = ProgrammingLanguage("Visual Basic", "Static", False, 1991, "Yes")
+    ruby = ProgrammingLanguage("Ruby", "Dynamic", True, 1995, True)
+    python = ProgrammingLanguage("Python", "Dynamic", True, 1991, False)
+    visual_basic = ProgrammingLanguage("Visual Basic", "Static", False, 1991, True)
 
     languages = [ruby, python, visual_basic]
     print(python)
