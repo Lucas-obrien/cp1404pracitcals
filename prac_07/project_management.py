@@ -15,7 +15,7 @@ class ProjectManagement:
 
     def __repr__(self):
         return (
-            f"  {self.name}, start: {self.start_date}, priority {self.priority}, estimate: ${self.cost_estimate:.2f}, "
+            f"{self.name}, start: {self.start_date}, priority {self.priority}, estimate: ${self.cost_estimate:.2f}, "
             f"completion: {self.completion_percentage}%")
 
     def __lt__(self, other):
@@ -27,5 +27,4 @@ class ProjectManagement:
     def is_incomplete(self):
         return int(self.completion_percentage) < 100
 
-    def is_valid_percent(self):
-        return int(self.completion_percentage) > 0 and self.completion_percentage.isint()
+
