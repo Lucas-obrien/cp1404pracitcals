@@ -140,9 +140,9 @@ def get_valid_number(output_string, minimum_number, maximum_number):
     valid_number = False
     while not valid_number:
         try:
+            number_choice = int(input(output_string))
             # or statement for validating cost, as no cost maximum has been explicitly stated,
             # so parameter is set to false.
-            number_choice = int(input(output_string))
             if (minimum_number <= number_choice <= maximum_number or
                     number_choice >= minimum_number and not maximum_number):
                 valid_number = True
