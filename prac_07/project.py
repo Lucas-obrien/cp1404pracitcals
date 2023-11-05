@@ -1,11 +1,8 @@
 """
 CP1404 - Lucas O'Brien
-Prac_07 - projects
+Prac_07 - Project Management Program
 estimate - 90 minutes
 actual - 8 hours
-
-
-
 """
 import datetime
 import csv
@@ -181,7 +178,7 @@ def get_valid_date(output_string):
 
 
 def filter_projects(projects):
-    """Sort projects based on an entered date value"""
+    """Sort projects based on an entered date value."""
     try:
         date_string = input("Show projects that start after date (d/m/yyyy): ")
         filter_date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()  # e.g.,"30/9/2022"
