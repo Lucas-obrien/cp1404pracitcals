@@ -1,7 +1,7 @@
 """
 
 estimate - 90 minutes
-actual -
+actual - 8 hours
 
 
 
@@ -15,7 +15,7 @@ from project_management import ProjectManagement
 MENU = ("- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date"
         "\n- (A)dd new project\n- (U)pdate project\n- (Q)uit\n>>> ")
 DEFAULT_LOAD_FILE = 'projects.txt'
-NO_MAXIMUM = "No Max"
+NO_MAXIMUM = True   # Used as an alternative instead of setting a MAXIMUM_COST
 DEFAULT_SAVE_FILE = 'projects.txt'
 MINIMUM_PRIORITY = 0
 MAXIMUM_PRIORITY = 9
@@ -120,7 +120,7 @@ def is_valid_number(output_string, minimum_number, maximum_number):
                 valid_number = True
             else:
                 error_string = f"between {minimum_number} and {maximum_number} inclusive" if (
-                        maximum_number != NO_MAXIMUM) else f"greater than {minimum_number}"
+                        maximum_number != NO_MAXIMUM) else f"greater than or equal to {minimum_number}"
                 print(f"Number must be {error_string}")
         except ValueError:
             print("Invalid number")
@@ -131,15 +131,12 @@ def is_valid_string(input_string):
     """Determine if a string is valid."""
     valid_string = False
     while not valid_string:
-        try:
-            choice = input(input_string)
-            if not choice:
-                print("cannot be blank")
-            else:
-                valid_string = True
-        except ValueError:
-            print(f"Invalid {input_string}")
-    return choice  # Ignore error; appears due to try/except
+        string_choice = input(input_string)
+        if not string_choice:
+            print("cannot be blank")
+        else:
+            valid_string = True
+    return string_choice  # Ignore error; won't reach return due to sentinel
 
 
 def is_valid_date(output_string):
