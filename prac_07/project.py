@@ -49,6 +49,28 @@ def main():
     save_file(file_header_names, projects, DEFAULT_SAVE_FILE)
 
 
+def save_file(file_header_names, projects, save_file_name):
+    """Open and save to a specified file."""
+    with open(save_file_name, "w", encoding="UTF-8") as out_file:
+        print(file_header_names, file=out_file)
+        for project in projects:
+            project_details = [project.name, project.start_date, str(project.priority),
+                               str(project.cost_estimate), str(project.completion_percentage)]
+            print("\t".join(project_details), file=out_file)
+
+
+def load_file(file_name):
+    """Read in a specified file."""
+    projects = []
+    with open(file_name, "r", encoding="UTF-8") as in_file:
+        file_header_names = in_file.readline().strip()
+        reader = csv.reader(in_file, delimiter='\t')
+        for row in reader:
+            projects.append(ProjectManagement(row[0], row[1], int(row[2]),
+                                              float(row[3]), int(row[4])))
+    return projects, file_header_names
+
+
 def manual_save_file(file_header_names, projects):
     """Prompt for a file name, then write list into it."""
     save_file_name = input("Input file name to save to: ")
@@ -169,28 +191,6 @@ def filter_projects(projects):
         display_project_objects(filtered_projects)
     except ValueError:
         print("Incorrect format for date")
-
-
-def save_file(file_header_names, projects, save_file_name):
-    """Open and save to a specified file."""
-    with open(save_file_name, "w", encoding="UTF-8") as out_file:
-        print(file_header_names, file=out_file)
-        for project in projects:
-            project_details = [project.name, project.start_date, str(project.priority),
-                               str(project.cost_estimate), str(project.completion_percentage)]
-            print("\t".join(project_details), file=out_file)
-
-
-def load_file(file_name):
-    """Read in a specified file."""
-    projects = []
-    with open(file_name, "r", encoding="UTF-8") as in_file:
-        file_header_names = in_file.readline().strip()
-        reader = csv.reader(in_file, delimiter='\t')
-        for row in reader:
-            projects.append(ProjectManagement(row[0], row[1], int(row[2]),
-                                              float(row[3]), int(row[4])))
-    return projects, file_header_names
 
 
 def display_all_current_projects(projects):
