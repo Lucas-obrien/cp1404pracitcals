@@ -44,6 +44,7 @@ def main():
         else:
             print("Invalid choice")
         choice = input(MENU).upper()
+    print("Thank you for using custom-built project management software.")
     save_file(file_header_names, projects, DEFAULT_SAVE_FILE)
 
 
@@ -91,16 +92,17 @@ def update_project(projects):
     """Select and update a current project."""
     for i, project in enumerate(projects):
         print(i, project)
-    choice = is_valid_project("Pick a project: ", projects)
+    project_choice = is_valid_project("Pick a project: ", projects)
+    print(projects[project_choice])
     new_percentage = get_valid_number("New percentage: ", MINIMUM_PERCENTAGE, MAXIMUM_PERCENTAGE)
     if not new_percentage:
-        new_percentage = projects[choice].completion_percentage
-    new_priority = int(get_valid_number("New Priority: ", MINIMUM_PRIORITY, MAXIMUM_PRIORITY))
+        new_percentage = projects[project_choice].completion_percentage
+    new_priority = get_valid_number("New Priority: ", MINIMUM_PRIORITY, MAXIMUM_PRIORITY)
     if not new_priority:
-        new_priority = projects[choice].priority
-    projects[choice] = ProjectManagement(projects[choice].name, projects[choice].start_date,
-                                         new_priority, projects[choice].cost_estimate,
-                                         new_percentage)
+        new_priority = projects[project_choice].priority
+    projects[project_choice] = ProjectManagement(projects[project_choice].name, projects[project_choice].start_date,
+                                                 new_priority, projects[project_choice].cost_estimate,
+                                                 new_percentage)
 
 
 def is_valid_project(output_string, projects):
@@ -136,11 +138,14 @@ def get_valid_number(output_string, minimum_number, maximum_number):
     valid_number = False
     while not valid_number:
         try:
-            number_choice = int(input(output_string))
-            # or statement for validating cost, as no cost maximum has been explicitly stated,
+            number_choice = input(output_string)
+
+            if number_choice == "":
+                return ""  # Exit function immediately as default option is to use current value
+            # Or statement for validating cost, as no cost maximum has been explicitly stated,
             # so parameter is set to false.
-            if (minimum_number <= number_choice <= maximum_number or
-                    number_choice >= minimum_number and not maximum_number):
+            if (minimum_number <= int(number_choice) <= maximum_number
+                    or int(number_choice) >= minimum_number and not maximum_number):
                 valid_number = True
             else:
                 error_string = f"between {minimum_number} and {maximum_number} inclusive" if \
@@ -148,7 +153,7 @@ def get_valid_number(output_string, minimum_number, maximum_number):
                 print(f"Number must be {error_string}")
         except ValueError:
             print("Invalid number")
-    return number_choice  # Ignore error; appears due to try/except
+    return int(number_choice)  # Ignore error; appears due to try/except
 
 
 def get_valid_string(input_string):
@@ -198,7 +203,7 @@ def display_all_current_projects(projects):
     display_project_objects(incomplete_projects)
     complete_projects = [project for project in projects if project not in incomplete_projects]
     complete_projects.sort(key=lambda project: project.priority)
-    print("Complete projects: ")
+    print("Completed projects: ")
     display_project_objects(complete_projects)
 
 
