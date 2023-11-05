@@ -1,5 +1,6 @@
 """
-
+CP1404 - Lucas O'Brien
+Prac_07 - projects
 estimate - 90 minutes
 actual - 8 hours
 
@@ -141,14 +142,14 @@ def get_valid_number(output_string, minimum_number, maximum_number):
         try:
             # or statement for validating cost, as no cost maximum has been explicitly stated,
             # so parameter is set to false.
+            number_choice = int(input(output_string))
             if (minimum_number <= number_choice <= maximum_number or
                     number_choice >= minimum_number and not maximum_number):
                 valid_number = True
             else:
-                error_string = f"between {minimum_number} and {maximum_number} inclusive" if (
-                        maximum_number != NO_MAXIMUM) else f"greater than or equal to {minimum_number}"
+                error_string = f"between {minimum_number} and {maximum_number} inclusive" if \
+                    (maximum_number != NO_MAXIMUM) else f"greater than or equal to {minimum_number}"
                 print(f"Number must be {error_string}")
-            number_choice = int(input(output_string))
         except ValueError:
             print("Invalid number")
     return number_choice  # Ignore error; appears due to try/except
