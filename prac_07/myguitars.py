@@ -1,8 +1,8 @@
 """
-
+Guitar Module for prac_07
+Opens and reads a csv file and constructs guitar objects, then saves to a csv file.
 estimation - 30 mins
 actual - 60 mins
-
 """
 
 import csv
