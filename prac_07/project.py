@@ -12,10 +12,10 @@ from project_management import ProjectManagement
 
 MENU = ("- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date"
         "\n- (A)dd new project\n- (U)pdate project\n- (Q)uit\n>>> ")
-DEFAULT_LOAD_FILE = 'projects.txt'
+DEFAULT_LOAD_FILE = 'projects.txt' #DEFAULT_FILENAME
 DEFAULT_FILE_HEADER_NAMES = "Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage\t"
 DEFAULT_SAVE_FILE = 'projects.txt'
-MINIMUM_PRIORITY = 0
+MINIMUM_PRIORITY = 1
 MAXIMUM_PRIORITY = 9
 MINIMUM_PERCENTAGE = 0
 MAXIMUM_PERCENTAGE = 100
@@ -52,10 +52,10 @@ def save_file(file_header_names, projects, save_file_name):
     """Open and save to a specified file."""
     with open(save_file_name, "w", encoding="UTF-8") as out_file:
         print(file_header_names, file=out_file)
-        for project in projects:
+        for project in projects: # just use print(project)
             project_details = [project.name, project.start_date, str(project.priority),
                                str(project.cost_estimate), str(project.completion_percentage)]
-            print("\t".join(project_details), file=out_file)
+            print("\t".join(project_details), file=out_file) # f project.name ..... three steps taken instead of one
 
 
 def load_file(file_name):
@@ -140,7 +140,7 @@ def get_valid_number(output_string, minimum_number, maximum_number):
         try:
             number_choice = input(output_string)
 
-            if number_choice == "":
+            if number_choice == "": # handle this separately, do a different function?
                 return ""  # Exit function immediately as default option is to use current value
             # Or statement for validating cost, as no cost maximum has been explicitly stated,
             # so parameter is set to false.
