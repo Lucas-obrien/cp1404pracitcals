@@ -2,6 +2,7 @@ from silver_service_taxi import SilverServiceTaxi
 
 
 def run_tests():
+    """Test SilverServiceTaxi."""
     hummer = SilverServiceTaxi("Hummer", 200, 2)
     hummer.start_fare()
     hummer.drive(18)
