@@ -1,8 +1,11 @@
 """
+Taxi trip simulator program
+
+Estimated: 30 mins
+Actual : 45 mins
+
 
 """
-
-
 
 from taxi import Taxi
 from silver_service_taxi import SilverServiceTaxi
@@ -19,9 +22,9 @@ def main():
     menu_choice = input(MENU).lower()
     while menu_choice != "q":
         if menu_choice == "c":
-            current_taxi = hail_taxi(current_taxi, taxis, total_bill)
+            current_taxi = hail_taxi(current_taxi, taxis)
         elif menu_choice == "d":
-            total_bill = drive_taxi(current_taxi, total_bill)
+            total_bill = calculate_taxi_trip(current_taxi)
         else:
             print("Invalid choice")
         print(f"Bill to date ${total_bill:.2f}")
@@ -31,7 +34,8 @@ def main():
     display_taxi_rank(taxis)
 
 
-def hail_taxi(current_taxi, taxis, total_bill):
+def hail_taxi(current_taxi, taxis):
+    """Choose a taxi to use."""
     print("Taxis available:")
     display_taxi_rank(taxis)
     try:
@@ -41,7 +45,8 @@ def hail_taxi(current_taxi, taxis, total_bill):
     return current_taxi
 
 
-def drive_taxi(current_taxi, total_bill):
+def calculate_taxi_trip(current_taxi, total_bill):
+    """Calculate taxi trip totals and return cost at end."""
     if current_taxi is not None:
         drive_distance = float(input("Drive how far? "))
         current_taxi.start_fare()
@@ -55,6 +60,7 @@ def drive_taxi(current_taxi, total_bill):
 
 
 def display_taxi_rank(taxis):
+    """Display the current taxis in a formatted list."""
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
 
