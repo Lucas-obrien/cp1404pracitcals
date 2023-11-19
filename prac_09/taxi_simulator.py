@@ -40,7 +40,7 @@ def hail_taxi(current_taxi, taxis):
     display_taxi_rank(taxis)
     try:
         current_taxi = taxis[int(input("Choose taxi: "))]
-    except IndexError:
+    except (IndexError, ValueError):
         print("Invalid taxi choice")
     return current_taxi
 
