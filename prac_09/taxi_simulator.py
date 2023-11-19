@@ -24,7 +24,7 @@ def main():
         if menu_choice == "c":
             current_taxi = hail_taxi(current_taxi, taxis)
         elif menu_choice == "d":
-            total_bill = calculate_taxi_trip(current_taxi)
+            total_bill += calculate_taxi_trip(current_taxi)
         else:
             print("Invalid choice")
         print(f"Bill to date ${total_bill:.2f}")
@@ -45,18 +45,19 @@ def hail_taxi(current_taxi, taxis):
     return current_taxi
 
 
-def calculate_taxi_trip(current_taxi, total_bill):
+def calculate_taxi_trip(current_taxi):
     """Calculate taxi trip totals and return cost at end."""
+    current_fare = 0
     if current_taxi is not None:
         drive_distance = float(input("Drive how far? "))
         current_taxi.start_fare()
         current_taxi.drive(drive_distance)
         current_fare = current_taxi.get_fare()
         print(f"Your {current_taxi.name} trip cost you ${current_fare:.2f}")
-        total_bill += current_fare
+        current_fare += current_fare
     else:
         print("You need to choose a taxi before you can drive")
-    return total_bill
+    return current_fare
 
 
 def display_taxi_rank(taxis):
