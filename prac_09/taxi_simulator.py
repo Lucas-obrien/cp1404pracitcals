@@ -48,7 +48,7 @@ def hail_taxi(current_taxi, taxis):
 def calculate_taxi_trip(current_taxi):
     """Calculate taxi trip totals and return cost at end."""
     current_fare = 0
-    if current_taxi is not None:
+    if current_taxi:
         drive_distance = float(input("Drive how far? "))
         current_taxi.start_fare()
         current_taxi.drive(drive_distance)
